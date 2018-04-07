@@ -1,0 +1,7 @@
+com/weinrich/employees/EmployeesApplication.class
+com/weinrich/employees/api/Department.class
+com/weinrich/employees/resources/GetDepartmentResource.class
+com/weinrich/employees/resources/AddEmployeeResource.class
+com/weinrich/employees/health/EmployeesHealthCheck.class
+com/weinrich/employees/api/Employee.class
+com/weinrich/employees/EmployeesConfiguration.class
