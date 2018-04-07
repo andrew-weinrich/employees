@@ -1,4 +1,4 @@
 logging:
   level: INFO
   loggers:
-    employees: DEBUG
+    com.weinrich.employees: DEBUG

@@ -9,18 +9,18 @@
         <maven>3.0.0</maven>
     </prerequisites>
 
-    <groupId>employees</groupId>
-    <artifactId>service</artifactId>
+    <groupId>com.weinrich.employees</groupId>
+    <artifactId>employees</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>employees-service</name>
+    <name>employees</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <dropwizard.version>1.2.2</dropwizard.version>
-        <mainClass>employees.employees-serviceApplication</mainClass>
+        <mainClass>com.weinrich.employees.employeesApplication</mainClass>
     </properties>
 
     <dependencyManagement>
