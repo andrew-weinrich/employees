@@ -41,7 +41,6 @@
             <artifactId>dropwizard-core</artifactId>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -52,7 +51,7 @@
                     <transformers>
                         <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>com.weinrich.employees.EmployeeApplication</mainClass>
+                            <mainClass>com.weinrich.employees.EmployeesApplication</mainClass>
                         </transformer>
                     </transformers>
                     <!-- exclude signed Manifests -->
@@ -84,6 +83,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <mainClass>${mainClass}</mainClass>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                     </archive>
                 </configuration>

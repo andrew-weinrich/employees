@@ -1,11 +1,11 @@
 package com.weinrich.employees.resources;
 
 import com.weinrich.employees.api.*;
+
 import com.codahale.metrics.annotation.Timed;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.Optional;
 
 

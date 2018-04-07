@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 @Path("/addEmployee")
 @Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class AddEmployeeResource {
     public AddEmployeeResource() {
         

@@ -13,6 +13,10 @@ public class Employee {
     private String startDate;
     
     
+    public Employee() {
+        this.id = 1;
+    }
+    
     public Employee(
         String firstName,
         String lastName,
@@ -28,29 +32,34 @@ public class Employee {
     }
     
     
-    @JsonProperty
+    @JsonProperty("FirstName")
     public String getFirstName() {
         return firstName;
     }
     
-    @JsonProperty
+    @JsonProperty("LastName")
     public String getLastName() {
         return lastName;
     }
     
-    @JsonProperty
+    @JsonProperty("Title")
     public String getTitle() {
         return title;
     }
     
-    @JsonProperty
+    @JsonProperty("Department")
     private String getDepartment() {
         return department;
     }
     
-    @JsonProperty
+    @JsonProperty("StartDate")
     private String getStartDate() {
         return startDate;
+    }
+    
+    @JsonProperty("Id")
+    private int getId() {
+        return id;
     }
     
     

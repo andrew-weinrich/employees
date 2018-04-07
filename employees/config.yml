@@ -15,16 +15,16 @@ logging:
 
 
 
-database:
-    driverClass: com.mysql.jdbc.Driver
-    user: dropwizard
-    password: 'P7bU11eVEhqhp'
-    url: jdbc:mysql://localhost/employees
-
-server:
-    applicationConnectors:
-        - type: http
-          port: 8080
-    adminConnectors:
-        - type: http
-          port: 8081
+#database:
+#    driverClass: com.mysql.jdbc.Driver
+#    user: dropwizard
+#    password: 'P7bU11eVEhqhp'
+#    url: jdbc:mysql://localhost/employees
+#
+#server:
+#    applicationConnectors:
+#        - type: http
+#          port: 8080
+#    adminConnectors:
+#        - type: http
+#          port: 8081
