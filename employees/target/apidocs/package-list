@@ -1,4 +1,5 @@
 com.weinrich.employees
 com.weinrich.employees.api
+com.weinrich.employees.db
 com.weinrich.employees.health
 com.weinrich.employees.resources

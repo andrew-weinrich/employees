@@ -3,9 +3,13 @@ package com.weinrich.employees;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.hibernate.HibernateBundle;
 
 import com.weinrich.employees.resources.*;
 import com.weinrich.employees.health.*;
+import com.weinrich.employees.api.*;
+import com.weinrich.employees.db.*;
 
 public class EmployeesApplication extends Application<EmployeesConfiguration> {
 
@@ -17,6 +21,15 @@ public class EmployeesApplication extends Application<EmployeesConfiguration> {
     public String getName() {
         return "Employees";
     }
+    
+    private final HibernateBundle<EmployeesConfiguration> hibernateBundle =
+        new HibernateBundle<EmployeesConfiguration>(Employee.class) {
+            @Override
+            public DataSourceFactory getDataSourceFactory(EmployeesConfiguration configuration) {
+                return configuration.getDataSourceFactory();
+            }
+        };
+    
 
     @Override
     public void initialize(final Bootstrap<EmployeesConfiguration> bootstrap) {
@@ -26,10 +39,14 @@ public class EmployeesApplication extends Application<EmployeesConfiguration> {
     @Override
     public void run(final EmployeesConfiguration configuration,
                     final Environment environment) {
-        final AddEmployeeResource addEmployeeResource = new AddEmployeeResource();
+        final EmployeeDAOInterface employeeDao = new EmployeeDAO(hibernateBundle.getSessionFactory());
+        final DepartmentDAOInterface departmentDao = new DepartmentDAO(hibernateBundle.getSessionFactory());
+        final TitleDAOInterface titleDao = new TitleDAO(hibernateBundle.getSessionFactory());
+                        
+        final AddEmployeeResource addEmployeeResource = new AddEmployeeResource(employeeDao, titleDao, departmentDao);
         environment.jersey().register(addEmployeeResource);
         
-        final GetDepartmentResource getDepartmentResource = new GetDepartmentResource();
+        final GetDepartmentResource getDepartmentResource = new GetDepartmentResource(departmentDao);
         environment.jersey().register(getDepartmentResource);
 
         final EmployeesHealthCheck healthCheck = new EmployeesHealthCheck();

@@ -1,7 +1,11 @@
 /Users/weinrich/Development/odeza/employees/employees/src/main/java/com/weinrich/employees/api/Department.java
 /Users/weinrich/Development/odeza/employees/employees/src/main/java/com/weinrich/employees/resources/AddEmployeeResource.java
 /Users/weinrich/Development/odeza/employees/employees/src/main/java/com/weinrich/employees/api/Employee.java
+/Users/weinrich/Development/odeza/employees/employees/src/main/java/com/weinrich/employees/db/DepartmentDAOInterface.java
 /Users/weinrich/Development/odeza/employees/employees/src/main/java/com/weinrich/employees/EmployeesApplication.java
 /Users/weinrich/Development/odeza/employees/employees/src/main/java/com/weinrich/employees/resources/GetDepartmentResource.java
+/Users/weinrich/Development/odeza/employees/employees/src/main/java/com/weinrich/employees/db/DepartmentDAO.java
 /Users/weinrich/Development/odeza/employees/employees/src/main/java/com/weinrich/employees/health/EmployeesHealthCheck.java
+/Users/weinrich/Development/odeza/employees/employees/src/main/java/com/weinrich/employees/db/EmployeeDAOInterface.java
+/Users/weinrich/Development/odeza/employees/employees/src/main/java/com/weinrich/employees/db/EmployeeDAO.java
 /Users/weinrich/Development/odeza/employees/employees/src/main/java/com/weinrich/employees/EmployeesConfiguration.java
