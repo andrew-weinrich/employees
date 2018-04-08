@@ -23,22 +23,28 @@ public class EmployeesApplication extends Application<EmployeesConfiguration> {
     }
     
     private final HibernateBundle<EmployeesConfiguration> hibernateBundle =
-        new HibernateBundle<EmployeesConfiguration>(Employee.class) {
+        new HibernateBundle<EmployeesConfiguration>(Employee.class, Title.class, Department.class) {
             @Override
             public DataSourceFactory getDataSourceFactory(EmployeesConfiguration configuration) {
                 return configuration.getDataSourceFactory();
             }
-        };
+        };;
     
 
     @Override
     public void initialize(final Bootstrap<EmployeesConfiguration> bootstrap) {
-        // TODO: application initialization
+        bootstrap.addBundle(hibernateBundle);
     }
 
     @Override
     public void run(final EmployeesConfiguration configuration,
-                    final Environment environment) {
+                    final Environment environment)
+    {
+        if (hibernateBundle == null)
+            throw new RuntimeException("hibernateBundle is null");
+        if (hibernateBundle.getSessionFactory() == null)
+            throw new RuntimeException("sessionFactory is null");
+                            
         final EmployeeDAOInterface employeeDao = new EmployeeDAO(hibernateBundle.getSessionFactory());
         final DepartmentDAOInterface departmentDao = new DepartmentDAO(hibernateBundle.getSessionFactory());
         final TitleDAOInterface titleDao = new TitleDAO(hibernateBundle.getSessionFactory());
