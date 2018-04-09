@@ -9,6 +9,7 @@ import io.dropwizard.hibernate.HibernateBundle;
 import com.weinrich.employees.resources.*;
 import com.weinrich.employees.health.*;
 import com.weinrich.employees.api.*;
+import com.weinrich.employees.core.*;
 import com.weinrich.employees.db.*;
 
 public class EmployeesApplication extends Application<EmployeesConfiguration> {
@@ -46,6 +47,9 @@ public class EmployeesApplication extends Application<EmployeesConfiguration> {
                         
         final AddEmployeeResource addEmployeeResource = new AddEmployeeResource(employeeDao, titleDao, departmentDao);
         environment.jersey().register(addEmployeeResource);
+        
+        final GetEmployeeResource getEmployeeResource = new GetEmployeeResource(employeeDao);
+        environment.jersey().register(getEmployeeResource);
         
         final GetDepartmentResource getDepartmentResource = new GetDepartmentResource(departmentDao);
         environment.jersey().register(getDepartmentResource);

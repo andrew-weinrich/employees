@@ -1,6 +1,6 @@
 package com.weinrich.employees.db;
 
-import com.weinrich.employees.api.Title;
+import com.weinrich.employees.core.Title;
 
 import java.util.Optional;
 

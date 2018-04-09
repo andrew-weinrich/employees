@@ -1,6 +1,6 @@
 package com.weinrich.employees.db;
 
-import com.weinrich.employees.api.Department;
+import com.weinrich.employees.core.Department;
 
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;

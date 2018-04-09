@@ -16,12 +16,16 @@ import java.text.*;
 @NamedQueries(
     {
         @NamedQuery(
-            name = "com.weinrich.employees.core.Employee.findEmployeesByDepartmentName",
-            query = "SELECT e "
-                    "FROM Department d" +
-                    "    INNER JOIN Title t "
-                    "    INNER JOIN Employee e"
+            name = "com.weinrich.employees.core.Employee.findEmployeesByDepartment",
+            query = "SELECT e " +
+                    "FROM Department d " +
+                    "    INNER JOIN Title t " +
+                    "    INNER JOIN Employee e " +
                     "WHERE d.name = :name"
+        ),
+        @NamedQuery(
+            name = "com.weinrich.employees.core.Employee.getEmployeeById",
+            query = "SELECT e FROM Employee e where e.id = :id"
         )
     })
 public class Employee {
@@ -30,31 +34,18 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Column(name = "firstName", nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "lastName", nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @OneToOne
-	@PrimaryKeyJoinColumn
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=Title.class )
+    @JoinColumn(name="title_id")
     private Title title;
 
-    @Column(name = "startDate", nullable = false)
-    private Date startDateNative;
-    
-    private String startDate;
-    
-    private static final StrictSimpleDateFormat dateFormat =
-        new StrictSimpleDateFormat("MM/dd/yyyy", "\\d\\d/\\d\\d/\\d\\d\\d\\d");
-    
-    /**
-     * Returns the format used for the startDate property.
-     */
-    public static StrictSimpleDateFormat getDateFormat() {
-        return dateFormat;
-    }
-    
+    @Column(name = "start_date", nullable = false)
+    private Date startDate;
     
     
     public Employee() {
@@ -62,28 +53,22 @@ public class Employee {
     }
     
     public Employee(
-        int id,
         String firstName,
         String lastName,
-        String title,
-        String department,
-        String startDate)
+        Title title,
+        Date startDate)
     {
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = title;
-        this.department = department;
         this.startDate = startDate;
     }
     
     
-    @JsonProperty("FirstName")
     public String getFirstName() {
         return firstName;
     }
     
-    @JsonProperty("LastName")
     public String getLastName() {
         return lastName;
     }
@@ -92,30 +77,10 @@ public class Employee {
         return title;
     }
     
-    @JsonProperty("Title")
-    public String getTitleString() {
-        return title.getName();
-    }
-    
-    @JsonProperty("Department")
-    public String getDepartmentString() {
-        return title.getDepartment().getName();
-    }
-    
-    @JsonProperty("StartDate")
-    public String getStartDate() {
-        if (startDate == null)
-            startDate = 
+    public Date getStartDate() {
         return startDate;
     }
     
-    public String getStartDateNative() {
-        if (startDateNative == null)
-            startDateNative = Employee.getDateFormat().parse(getStartDate());
-        return startDateNative;
-    }
-    
-    @JsonProperty("Id")
     public int getId() {
         return id;
     }

@@ -9,6 +9,13 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "department")
+@NamedQueries(
+    {
+        @NamedQuery(
+            name = "com.weinrich.employees.core.Department.getDepartmentByName",
+            query = "SELECT d FROM Department d WHERE d.name = :name"
+        )
+    })
 public class Department {
     @Id
     @Column(name = "department_id", nullable = false)
@@ -27,11 +34,8 @@ public class Department {
         this.name = name;
         this.id = id;
     }
-    /*
-    @OneToMany(mappedBy="department_id")
-    public List<Employee> getEmployees() {
-        return new ArrayList<Employee>();
-        //return this.employees;
+    
+    public String getName() {
+        return this.name;
     }
-    */
 }

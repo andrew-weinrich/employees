@@ -1,6 +1,6 @@
 package com.weinrich.employees.db;
 
-import com.weinrich.employees.api.Department;
+import com.weinrich.employees.core.Department;
 
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.*;
@@ -14,7 +14,7 @@ public class DepartmentDAO extends AbstractDAO<Department> implements Department
     }
     
     public Optional<Department> findDepartmentByName(String departmentName) {
-        Query query = namedQuery("com.weinrich.employees.api.Department.findDepartmentByName");  
+        Query query = namedQuery("com.weinrich.employees.core.Department.getDepartmentByName");  
         query.setString("name", departmentName);  
         
         Department department = (Department)(query.uniqueResult());

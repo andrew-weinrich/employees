@@ -39,26 +39,33 @@ public class AddEmployeeResource {
     @POST
     @Timed
     @UnitOfWork
-    public Employee addEmployee(@NotNull @Valid Employee employee) {
+    public EmployeeJson addEmployee(@NotNull @Valid EmployeeJson employeeJson) {
+        Date startDate = null;
         try {
             // validate start date
             // realistically there should be additional checks here (e.g. you can't have a starting date in 1872)
-            Date date = Employee.getDateFormat().parse(employee.getStartDate());
+            startDate = EmployeeJson.getDateFormat().parse(employeeJson.getStartDate());
         }
         catch (Exception e) {
-            throw new WebApplicationException("Invalid start date: " + employee.getStartDate(), 400);
+            throw new WebApplicationException("Invalid start date: " + employeeJson.getStartDate(), 400);
         }
         
         // check department and title
-        Optional<Department> department = departmentDao.findDepartmentByName(employee.getDepartment());
+        Optional<Department> department = departmentDao.findDepartmentByName(employeeJson.getDepartment());
         if (!department.isPresent())
-            throw new WebApplicationException("Invalid department name: " + employee.getDepartment(), 400);
+            throw new WebApplicationException("Invalid department name: " + employeeJson.getDepartment(), 400);
         
-        Optional<Title> title = titleDao.findTitleByName(employee.getTitle(), employee.getDepartment());
+        Optional<Title> title = titleDao.findTitleByName(employeeJson.getTitle(), employeeJson.getDepartment());
         if (!title.isPresent())
-            throw new WebApplicationException("Invalid title name: " + employee.getTitle(), 400);
+            throw new WebApplicationException("Invalid title name: " + employeeJson.getTitle(), 400);
+        
+        
+        Employee employee = new Employee(employeeJson.getFirstName(), employeeJson.getLastName(), title.get(), startDate);
         
         // return back the employee with a newly-created ID
-        return employeeDao.createEmployee(employee);
+        employee = employeeDao.createEmployee(employee);
+        
+        employeeJson.setId(employee.getId());
+        return employeeJson;
     }
 }
