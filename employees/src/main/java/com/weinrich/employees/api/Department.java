@@ -18,6 +18,7 @@ public class Department {
         
         this.employees = new ArrayList<Employee>();
         this.employees.add(new Employee(
+            1,
             "Bill",
             "Smith",
             "Director",

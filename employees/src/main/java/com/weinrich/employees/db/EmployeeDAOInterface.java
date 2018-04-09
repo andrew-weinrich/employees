@@ -4,9 +4,11 @@ import com.weinrich.employees.api.Employee;
 import com.weinrich.employees.api.Department;
 
 import java.util.Optional;
+import java.util.List;
+
 
 public interface EmployeeDAOInterface {
-    Optional<Employee> findEmployeeByName(String firstName, String lastName);
+    List<Employee> findEmployeesByName(String lastName, String firstName);
 
-    Employee create(Employee employee);
+    Employee createEmployee(Employee employee);
 }

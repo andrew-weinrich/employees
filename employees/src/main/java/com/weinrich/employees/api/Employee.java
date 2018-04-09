@@ -3,9 +3,13 @@ package com.weinrich.employees.api;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
 
+import com.weinrich.employees.core.*;
+
+import java.util.*;
+import java.text.*;
+
 public class Employee {
     private int id;
-    
     private String firstName;
     private String lastName;
     private String title;
@@ -13,17 +17,30 @@ public class Employee {
     private String startDate;
     
     
+    private static final StrictSimpleDateFormat dateFormat;
+    
+    public static StrictSimpleDateFormat getDateFormat() {
+        return dateFormat;
+    }
+    
+    static {
+        dateFormat = new StrictSimpleDateFormat("MM/dd/yyyy", "\\d\\d/\\d\\d/\\d\\d\\d\\d");
+    }
+    
+    
     public Employee() {
-        this.id = 1;
+        
     }
     
     public Employee(
+        int id,
         String firstName,
         String lastName,
         String title,
         String department,
         String startDate)
     {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = title;
@@ -48,17 +65,17 @@ public class Employee {
     }
     
     @JsonProperty("Department")
-    private String getDepartment() {
+    public String getDepartment() {
         return department;
     }
     
     @JsonProperty("StartDate")
-    private String getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
     
     @JsonProperty("Id")
-    private int getId() {
+    public int getId() {
         return id;
     }
     

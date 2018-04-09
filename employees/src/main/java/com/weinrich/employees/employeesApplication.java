@@ -40,11 +40,6 @@ public class EmployeesApplication extends Application<EmployeesConfiguration> {
     public void run(final EmployeesConfiguration configuration,
                     final Environment environment)
     {
-        if (hibernateBundle == null)
-            throw new RuntimeException("hibernateBundle is null");
-        if (hibernateBundle.getSessionFactory() == null)
-            throw new RuntimeException("sessionFactory is null");
-                            
         final EmployeeDAOInterface employeeDao = new EmployeeDAO(hibernateBundle.getSessionFactory());
         final DepartmentDAOInterface departmentDao = new DepartmentDAO(hibernateBundle.getSessionFactory());
         final TitleDAOInterface titleDao = new TitleDAO(hibernateBundle.getSessionFactory());

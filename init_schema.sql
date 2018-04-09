@@ -13,8 +13,7 @@ CREATE TABLE title (
     PRIMARY KEY (title_id)
 );
 
-CREATE UNIQUE INDEX name_index ON title (department_id, name);
-
+CREATE UNIQUE INDEX title_department_name_index ON title (department_id, name);
 
 CREATE TABLE employee (
     employee_id INT AUTO_INCREMENT,
@@ -25,6 +24,6 @@ CREATE TABLE employee (
     PRIMARY KEY (employee_id)
 );
 
-CREATE UNIQUE INDEX name_index ON employee (first_name, last_name);
+CREATE INDEX employee_name_index ON employee (first_name, last_name);
 
 

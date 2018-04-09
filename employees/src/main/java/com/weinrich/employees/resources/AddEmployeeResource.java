@@ -2,12 +2,15 @@ package com.weinrich.employees.resources;
 
 import com.weinrich.employees.api.*;
 import com.weinrich.employees.db.*;
+import com.weinrich.employees.core.*;
 
 import com.codahale.metrics.annotation.Timed;
 
+import java.util.*;
+import java.text.*;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.concurrent.atomic.AtomicLong;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
@@ -20,15 +23,43 @@ public class AddEmployeeResource {
     final TitleDAOInterface titleDao;
     final DepartmentDAOInterface departmentDao;
     
-    public AddEmployeeResource(EmployeeDAOInterface employeeDao, TitleDAOInterface titleDao, DepartmentDAOInterface departmentDao) {
+    public AddEmployeeResource(
+        EmployeeDAOInterface employeeDao,
+        TitleDAOInterface titleDao,
+        DepartmentDAOInterface departmentDao)
+    {
         this.employeeDao = employeeDao;
         this.departmentDao = departmentDao;
         this.titleDao = titleDao;
     }
     
+    
     @POST
     @Timed
     public Employee addEmployee(@NotNull @Valid Employee employee) {
-        return employee;
+        try {
+            // validate start date
+            // realistically there should be additional checks here (e.g. you can't have a starting date in 1872)
+            SimpleDateFormat dateFormat = new StrictSimpleDateFormat("MM/dd/yyyy", "\\d\\d/\\d\\d/\\d\\d\\d\\d");
+            //SimpleDateFormat dateFormat = new StrictSimpleDateFormat("MM/dd/yyyy");
+            //Date date = Employee.getDateFormat().parse(employee.getStartDate());
+            System.out.println(employee.getStartDate());
+            Date date1 = dateFormat.parse(employee.getStartDate());
+            System.out.println(dateFormat.format(date1));
+        }
+        catch (Exception e) {
+            throw new WebApplicationException("Invalid start date: " + employee.getStartDate(), 400);
+        }
+        
+        // check department and title
+        Optional<Department> department = departmentDao.findDepartmentByName(employee.getDepartment());
+        if (!department.isPresent())
+            throw new WebApplicationException("Invalid department name: " + employee.getDepartment(), 400);
+        
+        Optional<Title> title = titleDao.findTitleByName(employee.getTitle(), employee.getDepartment());
+        if (!title.isPresent())
+            throw new WebApplicationException("Invalid title name: " + employee.getTitle(), 400);
+        
+        return employeeDao.createEmployee(employee);
     }
 }
