@@ -8,24 +8,50 @@ import com.weinrich.employees.core.*;
 import java.util.*;
 import java.text.*;
 
+/*
+@Entity
+@Table(name = "people")
+@NamedQueries(
+    {
+        @NamedQuery(
+            name = "com.example.helloworld.core.Person.findAll",
+            query = "SELECT p FROM Person p"
+        )
+    })
+        */
 public class Employee {
+    
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    //@Column(name = "firstName", nullable = false)
     private String firstName;
+
+    //@Column(name = "firstName", nullable = false)
     private String lastName;
+
+    //@Column(name = "firstName", nullable = false)
     private String title;
+
+    //@Column(name = "firstName", nullable = false)
     private String department;
+
+    //@Column(name = "firstName", nullable = false)
+    private Date startDateNative;
+    
     private String startDate;
     
+    private static final StrictSimpleDateFormat dateFormat =
+        new StrictSimpleDateFormat("MM/dd/yyyy", "\\d\\d/\\d\\d/\\d\\d\\d\\d");
     
-    private static final StrictSimpleDateFormat dateFormat;
-    
+    /**
+     * Returns the format used for the startDate property.
+     */
     public static StrictSimpleDateFormat getDateFormat() {
         return dateFormat;
     }
     
-    static {
-        dateFormat = new StrictSimpleDateFormat("MM/dd/yyyy", "\\d\\d/\\d\\d/\\d\\d\\d\\d");
-    }
     
     
     public Employee() {

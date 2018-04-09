@@ -5,6 +5,8 @@ import com.weinrich.employees.db.*;
 
 import com.codahale.metrics.annotation.Timed;
 
+import io.dropwizard.hibernate.*;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Optional;
@@ -22,6 +24,7 @@ public class GetDepartmentResource {
     
     @GET
     @Timed
+    @UnitOfWork
     public List<Employee> getEmployeesInDepartment(@PathParam("department") String departmentName) {
         Optional<Department> department = this.departmentDAO.findDepartmentByName(departmentName);
         

@@ -20,6 +20,6 @@ public class EmployeeDAO extends AbstractDAO<Employee> implements EmployeeDAOInt
     }
 
     public Employee createEmployee(Employee employee) {
-        return employee;
+        return persist(employee);
     }
 }

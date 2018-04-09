@@ -40,12 +40,7 @@ public class AddEmployeeResource {
         try {
             // validate start date
             // realistically there should be additional checks here (e.g. you can't have a starting date in 1872)
-            SimpleDateFormat dateFormat = new StrictSimpleDateFormat("MM/dd/yyyy", "\\d\\d/\\d\\d/\\d\\d\\d\\d");
-            //SimpleDateFormat dateFormat = new StrictSimpleDateFormat("MM/dd/yyyy");
-            //Date date = Employee.getDateFormat().parse(employee.getStartDate());
-            System.out.println(employee.getStartDate());
-            Date date1 = dateFormat.parse(employee.getStartDate());
-            System.out.println(dateFormat.format(date1));
+            Date date = Employee.getDateFormat().parse(employee.getStartDate());
         }
         catch (Exception e) {
             throw new WebApplicationException("Invalid start date: " + employee.getStartDate(), 400);
@@ -60,6 +55,7 @@ public class AddEmployeeResource {
         if (!title.isPresent())
             throw new WebApplicationException("Invalid title name: " + employee.getTitle(), 400);
         
+        // return back the employee with a newly-created ID
         return employeeDao.createEmployee(employee);
     }
 }

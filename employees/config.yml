@@ -1,7 +1,10 @@
 logging:
-  level: INFO
+  level: DEBUG
   loggers:
-    com.weinrich.employees: DEBUG
+    org.eclipse: ERROR
+    io.dropwizard: ERROR
+    com.weinrich.employees: ERROR
+    org.hibernate: DEBUG
   appenders:
     - type: console
     - type: file
@@ -13,11 +16,14 @@ logging:
       timeZone: UTC
       maxFileSize: 10MB
 
+
 database:
     driverClass: com.mysql.jdbc.Driver
     user: dropwizard
     password: 'P7bU11eVEhqhp'
     url: jdbc:mysql://localhost/employees
+    properties:
+      hibernate.show_sql: true
 
 server:
     applicationConnectors:
