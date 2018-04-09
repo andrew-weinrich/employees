@@ -6,6 +6,8 @@ import com.weinrich.employees.core.*;
 
 import com.codahale.metrics.annotation.Timed;
 
+import io.dropwizard.hibernate.*;
+
 import java.util.*;
 import java.text.*;
 
@@ -36,6 +38,7 @@ public class AddEmployeeResource {
     
     @POST
     @Timed
+    @UnitOfWork
     public Employee addEmployee(@NotNull @Valid Employee employee) {
         try {
             // validate start date

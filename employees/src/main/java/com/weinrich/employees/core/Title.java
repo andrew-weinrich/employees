@@ -1,14 +1,23 @@
-package com.weinrich.employees.api;
+package com.weinrich.employees.core;
 
 import java.util.*;
 
-import com.weinrich.employees.api.Department;
+import javax.persistence.*;
 
+import com.weinrich.employees.core.Department;
+
+@Entity
+@Table(name = "department")
 public class Title {
+    @Id
+    @Column(name = "title_id", nullable = false)
     private int id;
     
+    @Column(name = "name", nullable = false)
     private String name;
     
+    @OneToOne
+	@PrimaryKeyJoinColumn
     private Department department;
     
     public Title(int id, String name, Department department) {
@@ -19,5 +28,9 @@ public class Title {
     
     public Department getDepartment() {
         return this.department;
+    }
+    
+    public String getName() {
+        return this.name;
     }
 }

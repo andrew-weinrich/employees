@@ -1,43 +1,46 @@
-package com.weinrich.employees.api;
+package com.weinrich.employees.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.*;
 
 import com.weinrich.employees.core.*;
 
 import java.util.*;
 import java.text.*;
 
-/*
+
 @Entity
-@Table(name = "people")
+@Table(name = "employee")
 @NamedQueries(
     {
         @NamedQuery(
-            name = "com.example.helloworld.core.Person.findAll",
-            query = "SELECT p FROM Person p"
+            name = "com.weinrich.employees.core.Employee.findEmployeesByDepartmentName",
+            query = "SELECT e "
+                    "FROM Department d" +
+                    "    INNER JOIN Title t "
+                    "    INNER JOIN Employee e"
+                    "WHERE d.name = :name"
         )
     })
-        */
 public class Employee {
-    
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "employee_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    //@Column(name = "firstName", nullable = false)
+    @Column(name = "firstName", nullable = false)
     private String firstName;
 
-    //@Column(name = "firstName", nullable = false)
+    @Column(name = "lastName", nullable = false)
     private String lastName;
 
-    //@Column(name = "firstName", nullable = false)
-    private String title;
+    @OneToOne
+	@PrimaryKeyJoinColumn
+    private Title title;
 
-    //@Column(name = "firstName", nullable = false)
-    private String department;
-
-    //@Column(name = "firstName", nullable = false)
+    @Column(name = "startDate", nullable = false)
     private Date startDateNative;
     
     private String startDate;
@@ -85,19 +88,31 @@ public class Employee {
         return lastName;
     }
     
-    @JsonProperty("Title")
-    public String getTitle() {
+    public Title getTitle() {
         return title;
     }
     
+    @JsonProperty("Title")
+    public String getTitleString() {
+        return title.getName();
+    }
+    
     @JsonProperty("Department")
-    public String getDepartment() {
-        return department;
+    public String getDepartmentString() {
+        return title.getDepartment().getName();
     }
     
     @JsonProperty("StartDate")
     public String getStartDate() {
+        if (startDate == null)
+            startDate = 
         return startDate;
+    }
+    
+    public String getStartDateNative() {
+        if (startDateNative == null)
+            startDateNative = Employee.getDateFormat().parse(getStartDate());
+        return startDateNative;
     }
     
     @JsonProperty("Id")

@@ -1,4 +1,4 @@
-package com.weinrich.employees.api;
+package com.weinrich.employees.core;
 
 import java.util.*;
 import javax.persistence.*;
@@ -9,17 +9,9 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "department")
-@NamedQueries(
-    {
-        @NamedQuery(
-            name = "com.weinrich.employees.api.Department.findDepartmentByName",
-            query = "SELECT d FROM Department d WHERE name = :name"
-        )
-    })
 public class Department {
     @Id
     @Column(name = "department_id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
     @Column(name = "name", nullable = false)
@@ -35,9 +27,11 @@ public class Department {
         this.name = name;
         this.id = id;
     }
-    
+    /*
+    @OneToMany(mappedBy="department_id")
     public List<Employee> getEmployees() {
         return new ArrayList<Employee>();
         //return this.employees;
     }
+    */
 }
