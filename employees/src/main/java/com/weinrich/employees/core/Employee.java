@@ -18,10 +18,10 @@ import java.text.*;
         @NamedQuery(
             name = "com.weinrich.employees.core.Employee.findEmployeesByDepartment",
             query = "SELECT e " +
-                    "FROM Department d " +
-                    "    INNER JOIN Title t " +
-                    "    INNER JOIN Employee e " +
-                    "WHERE d.name = :name"
+                    "FROM Employee e " +
+                    "    INNER JOIN e.title AS t " +
+                    "    INNER JOIN t.department AS d  " +
+                    "WHERE d.name = :departmentName"
         ),
         @NamedQuery(
             name = "com.weinrich.employees.core.Employee.getEmployeeById",

@@ -13,4 +13,7 @@ public interface EmployeeDAOInterface {
     Employee createEmployee(Employee employee);
     
     Optional<Employee> getEmployeeById(int id);
+
+    List<Employee> findEmployeesByDepartmentName(String departmentName);
+
 }

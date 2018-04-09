@@ -12,29 +12,34 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Optional;
 import java.util.*;
-
+import java.util.stream.Collectors;
 
 @Path("/getEmployeesInDepartment/{department}")
 @Produces(MediaType.APPLICATION_JSON)
 public class GetDepartmentResource {
-    private final DepartmentDAOInterface departmentDAO;
+    private final DepartmentDAOInterface departmentDao;
+    private final EmployeeDAOInterface employeeDao;
     
-    public GetDepartmentResource(DepartmentDAOInterface departmentDAO) {
-        this.departmentDAO = departmentDAO;
+    public GetDepartmentResource(DepartmentDAOInterface departmentDao, EmployeeDAOInterface employeeDao) {
+        this.departmentDao = departmentDao;
+        this.employeeDao = employeeDao;
     }
     
     @GET
     @Timed
     @UnitOfWork
-    public List<Employee> getEmployeesInDepartment(@PathParam("department") String departmentName) {
-        return new ArrayList<Employee>();
-        /*
-        Optional<Department> department = this.departmentDAO.findDepartmentByName(departmentName);
+    public List<EmployeeJson> getEmployeesInDepartment(@PathParam("department") String departmentName) {
+        List<Employee> employees = this.employeeDao.findEmployeesByDepartmentName(departmentName);
         
-        if (!department.isPresent())
-            throw new WebApplicationException("Invalid department", 404);
-        else
-            return department.get().getEmployees();
-        */
+        List<EmployeeJson> jsonList = employees.stream().map(e -> new EmployeeJson(
+                e.getId(),
+                e.getFirstName(),
+                e.getLastName(),
+                e.getTitle().getName(),
+                e.getTitle().getDepartment().getName(),
+                EmployeeJson.getDateFormat().format(e.getStartDate())))
+            .collect(Collectors.toList());
+        
+        return jsonList;
     }
 }

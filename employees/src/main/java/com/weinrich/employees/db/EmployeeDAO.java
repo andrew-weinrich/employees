@@ -6,6 +6,7 @@ import com.weinrich.employees.db.EmployeeDAOInterface;
 
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.*;
+import org.hibernate.query.Query;
 
 import java.util.*;
 
@@ -30,6 +31,13 @@ public class EmployeeDAO extends AbstractDAO<Employee> implements EmployeeDAOInt
         Employee employee = (Employee)(query.uniqueResult());
         
         return Optional.ofNullable(employee);
+    }
+
+    public List<Employee> findEmployeesByDepartmentName(String departmentName) {
+        Query<Employee> query = namedQuery("com.weinrich.employees.core.Employee.findEmployeesByDepartment");  
+        query.setString("departmentName", departmentName);  
+        
+        return this.list(query);
     }
 
 

@@ -8,6 +8,10 @@ import java.util.*;
 import java.text.*;
 
 
+/**
+ * This class provides an external view representation of Employee, suitable
+ * for POSTing and GETing.
+ */
 public class EmployeeJson {
     private int id;
     
@@ -37,12 +41,14 @@ public class EmployeeJson {
     }
     
     public EmployeeJson(
+        int id,
         String firstName,
         String lastName,
         String title,
         String department,
         String startDate)
     {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = title;

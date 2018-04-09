@@ -1,10 +1,10 @@
 logging:
-  level: DEBUG
+  level: INFO
   loggers:
     org.eclipse: ERROR
     io.dropwizard: ERROR
     com.weinrich.employees: ERROR
-    org.hibernate: DEBUG
+    org.hibernate: WARN
   appenders:
     - type: console
     - type: file

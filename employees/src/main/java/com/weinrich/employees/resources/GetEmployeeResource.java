@@ -39,6 +39,7 @@ public class GetEmployeeResource {
         else {
             Employee employee = employeeOptional.get();
             EmployeeJson employeeJson = new EmployeeJson(
+                employee.getId(),
                 employee.getFirstName(),
                 employee.getLastName(),
                 employee.getTitle().getName(),

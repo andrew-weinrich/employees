@@ -51,7 +51,7 @@ public class EmployeesApplication extends Application<EmployeesConfiguration> {
         final GetEmployeeResource getEmployeeResource = new GetEmployeeResource(employeeDao);
         environment.jersey().register(getEmployeeResource);
         
-        final GetDepartmentResource getDepartmentResource = new GetDepartmentResource(departmentDao);
+        final GetDepartmentResource getDepartmentResource = new GetDepartmentResource(departmentDao, employeeDao);
         environment.jersey().register(getDepartmentResource);
 
         final EmployeesHealthCheck healthCheck = new EmployeesHealthCheck();
