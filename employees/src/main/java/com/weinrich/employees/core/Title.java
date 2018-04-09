@@ -31,13 +31,6 @@ public class Title {
         
     }
     
-    
-    public Title(int id, String name, Department department) {
-        this.name = name;
-        this.id = id;
-        //this.department = department;
-    }
-    
     public Department getDepartment() {
         return this.department;
     }

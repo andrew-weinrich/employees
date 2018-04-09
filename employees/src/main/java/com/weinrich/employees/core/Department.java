@@ -24,15 +24,8 @@ public class Department {
     @Column(name = "name", nullable = false)
     private String name;
     
-    //private List<Employee> employees = new ArrayList<Employee>();
-    
     public Department() {
         
-    }
-    
-    public Department(int id, String name) {
-        this.name = name;
-        this.id = id;
     }
     
     public String getName() {
