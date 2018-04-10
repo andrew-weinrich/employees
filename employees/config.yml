@@ -1,9 +1,9 @@
 logging:
   level: INFO
   loggers:
-    org.eclipse: ERROR
-    io.dropwizard: ERROR
-    com.weinrich.employees: ERROR
+    org.eclipse: WARN
+    io.dropwizard: WARN
+    com.weinrich.employees: WARN
     org.hibernate: WARN
   appenders:
     - type: console
@@ -19,7 +19,7 @@ logging:
 database:
     driverClass: com.mysql.jdbc.Driver
     user: dropwizard
-    password: 'P7bU11eVEhqhp'
+    password: 'password_goes_here'
     url: jdbc:mysql://localhost/employees
     properties:
       hibernate.show_sql: false

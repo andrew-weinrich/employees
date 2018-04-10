@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.Length;
 @NamedQueries(
     {
         @NamedQuery(
-            name = "com.weinrich.employees.core.Department.getDepartmentByName",
+            name = "com.weinrich.employees.core.Department.findDepartmentByName",
             query = "SELECT d FROM Department d WHERE d.name = :name"
         )
     })

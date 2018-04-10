@@ -9,10 +9,6 @@ public class EmployeesHealthCheck extends HealthCheck {
 
     @Override
     protected Result check() throws Exception {
-        // check db connection
-        //if (!db.connectionIsValid) {
-        //    return Result.unhealthy("template doesn't include a name");
-        //}
         return Result.healthy();
     }
 }

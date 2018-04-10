@@ -28,6 +28,10 @@ import java.text.*;
             query = "SELECT e FROM Employee e where e.id = :id"
         )
     })
+/**
+ * Class for employees. Employees with the same name/title/department can exist so long as they have unique IDs.
+ * Employees are linked to their department through their title.
+ */
 public class Employee {
     @Id
     @Column(name = "employee_id", nullable = false)

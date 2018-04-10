@@ -15,6 +15,9 @@ import com.weinrich.employees.core.Department;
             query = "SELECT t FROM Title t JOIN Department d ON t.department = d WHERE t.name = :titleName AND d.name = :departmentName"
         )
     })
+/**
+ * Class for titles. The same title string (e.g. 'Analyst') can exist in different departments while denoting different jobs.
+ */
 public class Title {
     @Id
     @Column(name = "title_id", nullable = false)

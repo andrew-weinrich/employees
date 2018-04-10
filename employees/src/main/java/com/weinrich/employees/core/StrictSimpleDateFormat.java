@@ -2,7 +2,6 @@ package com.weinrich.employees.core;
 
 // all the below is copied from https://stackoverflow.com/questions/16014488/simpledateformat-parse-ignores-the-number-of-characters-in-pattern
 // with some necessary additions to check the regex
-// how is it that Java has tried to properly implement dates about 7 times and screwed up every single attempt?
 
 import java.text.DateFormatSymbols;
 import java.text.ParseException;

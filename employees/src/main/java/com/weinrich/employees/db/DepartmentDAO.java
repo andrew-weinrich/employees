@@ -14,7 +14,7 @@ public class DepartmentDAO extends AbstractDAO<Department> implements Department
     }
     
     public Optional<Department> findDepartmentByName(String departmentName) {
-        Query query = namedQuery("com.weinrich.employees.core.Department.getDepartmentByName");  
+        Query query = namedQuery("com.weinrich.employees.core.Department.findDepartmentByName");  
         query.setString("name", departmentName);  
         
         Department department = (Department)(query.uniqueResult());

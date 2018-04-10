@@ -29,8 +29,13 @@ public class GetDepartmentResource {
     @Timed
     @UnitOfWork
     public List<EmployeeJson> getEmployeesInDepartment(@PathParam("department") String departmentName) {
+        Optional<Department> department = departmentDao.findDepartmentByName(departmentName);
+        if (!department.isPresent())
+            throw new WebApplicationException("Invalid department name: " + departmentName, 404);
+        
         List<Employee> employees = this.employeeDao.findEmployeesByDepartmentName(departmentName);
         
+        // convert domain objects to view objects
         List<EmployeeJson> jsonList = employees.stream().map(e -> new EmployeeJson(
                 e.getId(),
                 e.getFirstName(),
