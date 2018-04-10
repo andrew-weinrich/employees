@@ -11,7 +11,7 @@
 
 1. Create a user `dropwizard`
 2. Create a database `employees` and give `dropwizard` full permissions
-3. Run the SQL script
+3. Run the SQL script `src/main/resources/init_schema.sql`.
 
 
 ### Testing
@@ -47,4 +47,4 @@
 1. The exact same record can exist in the same department more than once, while still designating separate employees (I once worked with two programmers who were both named David Smith)
 1. I used an enhanced version of SimpleDateFormat that is extremely strict.
 1. The DAO implementations are hidden behind interfaces that could be mocked. Because this is such a simple project, and the DAOs don't have very much logic, I didn't bother making unit test mocks, and instead covered all testing through the the `test.py` script.
-1. I added another endpoing, /getEmployee/{id}, for testing purposes.
+1. I added another endpoint, `/getEmployee/{id}`, for testing purposes.
