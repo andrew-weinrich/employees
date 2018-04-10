@@ -12,6 +12,8 @@
 
 employees/target/
 
+employees/bin/
+
 # Package Files #
 *.jar
 *.war
